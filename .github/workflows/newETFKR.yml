@@ -1,0 +1,47 @@
+name: newETFKR
+
+on:
+  schedule:
+    - cron: "*/59 * * * *"
+  workflow_dispatch:
+
+jobs:
+  run-script:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install packages
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Set ENV
+        run: |
+          echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" >> $GITHUB_ENV
+          echo "TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}" >> $GITHUB_ENV
+
+      - name: Run Script
+        run: python main_krx.py
+
+      - name: Commit DB
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git add etf_db_krx.csv
+          git diff --cached --quiet || git commit -m "update krx etf db"
+
+          git pull --rebase origin main
+          git push
