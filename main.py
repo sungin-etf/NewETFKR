@@ -112,7 +112,7 @@ def check_new_etf_KRXCode():
         name = etf["fund_name"]
 
         if code not in existing:
-            send_telegram_KRXCode(f"[표준코드 발급] {name} ({code})")
+            send_telegram_KRXCode(f"[표준코드 발급] {name}")
             append_new_etf_KRXCode(code, name)
             existing.add(code)
 
