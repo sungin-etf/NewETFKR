@@ -49,6 +49,7 @@ def append_new_etf_KRXCode(code, name):
 def crawling_KRXCode():
     etf_list = []
     page = 1
+    prev_page_data = None
 
     while True:
         params = {
@@ -59,22 +60,35 @@ def crawling_KRXCode():
             "currentPage": str(page),
             "pageIndex": str(page)
         }
+
         res = requests.post(URL_KRXCode, data=params)
         soup = BeautifulSoup(res.text, "html.parser")
         rows = soup.select("table tbody tr")
+
         if not rows:
             break
+
+        current_page_data = []
+
         for r in rows:
             cols = r.find_all("td")
             if len(cols) > 1:
                 code = cols[0].text.strip()
                 name = cols[1].text.strip()
 
+                current_page_data.append(code)
+
                 etf_list.append({
                     "issuer_code": code,
                     "fund_name": name
                 })
+
+        if current_page_data == prev_page_data:
+            break
+
+        prev_page_data = current_page_data
         page += 1
+
     return etf_list
 
 # 텔레 발송
