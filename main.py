@@ -109,4 +109,4 @@ def check_new_etf_KRXCode():
 
 # 실행
 if __name__ == "__main__":
-    check_new_etf()
+    check_new_etf_KRXCode()
