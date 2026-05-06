@@ -1,4 +1,4 @@
-from krx_code import check_new_etf_KRXCode
+from KRXCode import check_new_etf_KRXCode
 
 if __name__ == "__main__":
     print("=== KRXCode 실행 ===")
