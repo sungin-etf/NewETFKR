@@ -106,7 +106,7 @@ def check_new_etf_DART():
                 continue
             if fund_name not in existing:
                 link = f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={rcept_no}"
-                message = f"[DART 최초 일괄신고서] {fund_name}\n{link}"
+                message = f"[DART 일괄신고서] {fund_name}\n{link}"
                 send_telegram_DART(message)
                 append_new_DART(fund_name)
                 existing.add(fund_name)
