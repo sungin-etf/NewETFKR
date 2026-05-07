@@ -31,6 +31,8 @@ jobs:
         run: |
           echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" >> $GITHUB_ENV
           echo "TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}" >> $GITHUB_ENV
+          echo "DART_API_KEY=${{ secrets.DART_API_KEY }}" >> $GITHUB_ENV
+          
 
       - name: Run Script
         run: python main.py
