@@ -69,7 +69,7 @@ def extract_etf_name(report_nm):
 # DART 신규 공시 체크
 def check_new_etf_DART():
     today = datetime.utcnow()
-    start_date = today - timedelta(days=14)
+    start_date = today - timedelta(days=50)
     existing = load_existing_DART()
     page_no = 1
     while True:
